@@ -6,6 +6,7 @@
 import * as assert from 'assert';
 import {DataObject, PrototypeOf} from './common-types';
 import {Model, ModelDefinition} from './model';
+import {model} from './decorators';
 
 /**
  * Create (define) a new model class with the given name and definition.
@@ -60,6 +61,9 @@ export function defineModelClass<
     Props
   >;
   assert.equal(modelClass.name, modelName);
+
+  // Apply `@model(definition)` to the generated class
+  model(definition)(modelClass);
   modelClass.definition = definition;
   return modelClass;
 }
